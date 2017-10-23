@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+  <title>JavaScript-Test</title>
+
+  <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
+  <meta name="Keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="language" content="en" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+
+  <meta name="robots" content="index, follow" />
+  
+  <link rel="stylesheet" type="text/css" href="screen.css" media="screen, projection" />
+  
+  <script type="text/javascript" src="innerDOM.js" charset="utf-8"></script>
+  
+  <script type="text/javascript">
+  	
+  	function convert() {
+  		
+  		var input = document.getElementById('input');
+  		var output = document.getElementById('output');  		
+  		var hide = document.getElementById('hide');
+  		var src = document.getElementById('src');
+  		
+  		while (output.hasChildNodes()) {
+  			output.removeChild(output.firstChild);
+  		}  		
+  		
+  		hide.style.display = "block";
+  		
+  		// start
+  		
+  		var timeStamp1 = new Date().getTime();
+  		
+  		var DOM = stringToDOM(input.value);
+  		output.appendChild(DOM);
+  		
+  		//stop  		
+  		
+  		var timeStamp2 = new Date().getTime();
+  		var diff = Math.floor(timeStamp2 - timeStamp1);
+  		 		
+  		alert("Zeit: \n" + diff + " msec");
+  		 		
+  		src.value = DOMtoString(output);
+  	
+  	}
+  	
+  	function convert2() {
+  		
+  		var input2 = document.getElementById('input2');
+  		var output2 = document.getElementById('output2');  		
+  		var hide2 = document.getElementById('hide2');
+  		var src2 = document.getElementById('src2');
+  		
+  		while (output2.hasChildNodes()) {
+  			output2.removeChild(output2.firstChild);
+  		}  		
+  		
+  		hide2.style.display = "block";
+  		
+  		// start
+  		
+  		var timeStamp1 = new Date().getTime();
+  		
+  		output2.innerHTML = input2.value;
+  		
+  		//stop  		
+  		
+  		var timeStamp2 = new Date().getTime();
+  		var diff = Math.floor(timeStamp2 - timeStamp1);
+  		 		
+  		alert("Zeit: \n" + diff + " msec");
+  		 		
+  		src2.value = output2.innerHTML.toString();
+  	
+  	}
+  	
+  </script>
+  
+</head>
+
+<body>
+  
+  <h1>string &lt;-&gt; DOM</h1>
+  
+  <h2>Enter some <strong>valid</strong> <acronym title="eXtensible Hypertext Markup Language">XHTML</acronym> into the textareas and <em>convert</em>!</h2>
+  
+  <div style="width: 48%; float:left; border: 1px solid Silver;">
+  
+  <h3>StringToDOM- &amp; DOMtoString - Test</h3>
+  
+  <form action="#" method="post">
+
+   	<p><textarea cols="40" rows="10" id="input"></textarea></p>
+   	<p class="right">
+   		<input type="reset" value="reset area" />
+   		<input type="button" value="convert!" onclick="convert()" />
+   	</p>
+    
+  </form>
+  
+  <div id="hide" style="display: none;">
+  
+  <hr />
+  
+  <div id="output" style="margin: 1em 0;"></div>
+  
+  <hr />
+  
+  <form action="#" method="post">
+  	<p><textarea cols="40" rows="10" id="src"></textarea></p>
+  </form>
+  
+  </div>
+  
+  </div>
+  
+  <div style="width: 48%; float:right; border: 1px solid Silver;">
+  
+  <h3>innerHTML Test</h3>
+  
+  <form action="#" method="post">
+
+   	<p><textarea cols="40" rows="10" id="input2"></textarea></p>
+   	<p class="right">
+   		<input type="reset" value="reset area" />
+   		<input type="button" value="convert!" onclick="convert2()" />
+   	</p>
+    
+  </form>
+  
+  <div id="hide2" style="display: none;">
+  
+  <hr />
+  
+  <div id="output2" style="margin: 1em 0;"></div>
+  
+  <hr />
+  
+  <form action="#" method="post">
+  	<p><textarea cols="40" rows="10" id="src2"></textarea></p>
+  </form>
+  
+  </div>
+
+  </div>
+  
+  <p style="clear: both;">This site uses <a href="http://wiki.simon-kuehn.de/webdesign:javascript:stringtodom">stringToDOM</a> &amp; <a href="http://wiki.simon-kuehn.de/webdesign:javascript:domtostring">DOMtoString</a> by Simon Kühn</p>
+  
+  <p style="clear: both;"><a href="http://simon-kuehn.de/kontakt_impressum.html">Impressum</a> | Inhalt, Programmierung und Design © <a href="http://simon-kuehn.de/">Simon Kühn</a></p>
+
+</body>
+</html>
